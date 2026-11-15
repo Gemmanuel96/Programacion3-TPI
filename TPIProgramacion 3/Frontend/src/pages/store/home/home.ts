@@ -255,7 +255,7 @@ function articulo(producto: Product, categorias: ICategorias[]): HTMLElement {
     const categoria = crearElemento('p', 'categoria', textoCategoria);
     const titulo = crearElemento('h3', 'titulo', producto.nombre);
     const descripcion = crearElemento('p', 'descripcion', producto.descripcion);
-    const textoPrecio = `Precio $${producto.precio}`;
+    const textoPrecio = `$${producto.precio}`;
     const precio = crearElemento('p', 'precio', textoPrecio);
 
     let disponible: HTMLElement;
