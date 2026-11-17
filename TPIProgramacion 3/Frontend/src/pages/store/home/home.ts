@@ -110,54 +110,8 @@ if (btnSesion) {
 
 function renderPrincipal(producto: Product) {
 
-    const detalleBox = document.querySelector("#detalleProducto") as HTMLElement;
-    const productoBox = document.querySelector("#productos-box") as HTMLElement;
-    const categoriaBox = document.querySelector(".box-categoria") as HTMLElement;
-
-    productoBox.style.display = 'none';
-    categoriaBox.style.display = 'none';
-    detalleBox.style.display = "flex";
-
-    const titulo = crearElemento("h1", "", producto.nombre);
-    const precioText = `Precio $${producto.precio}`
-    const precio = crearElemento("p", "", precioText);
-
-    let disponible: HTMLElement;
-    if (producto.disponible) {
-        disponible = crearElemento('p', "", "Disponible");
-        disponible.style.backgroundColor = "green";
-    } else {
-        disponible = crearElemento('p', "", "No Disponible");
-        disponible.style.backgroundColor = "red";
-    }
-
-    const descripcion = crearElemento('p', "", producto.descripcion);
-
-    const imagen: HTMLImageElement = crearElemento('img') as HTMLImageElement;
-    imagen.src = producto.imagen;
-
-
-    //Controles - Botones
-    const boxControles = crearControles();
-    boxControles.classList.add("boxControles");
-
-    const boxControlesAgregar = crearControlesAgregar();
-    boxControlesAgregar.classList.add("boxAgregar")
-
-
-    //Cajas de elementos
-    const boxImagen = crearElemento('div', 'img-c');
-    boxImagen.appendChild(imagen);
-
-    const boxDetalle = crearElemento("div", "det-c");
-    boxDetalle.append(titulo,disponible, descripcion, precio, boxControles, boxControlesAgregar);
-
-    detalleBox.innerHTML = "";
-    //Agregamos a la caja principal
-    detalleBox.append(boxImagen,boxDetalle);
-
-
-
+    c
+    
 }
 
 
@@ -181,7 +135,7 @@ function crearCategoria(categoria: ICategorias) {
         li.classList.add("activo");
 
         // 🔹 Filtrar productos
-        const contenedor = document.querySelector<HTMLDivElement>("#productos-items");
+        const contenedor = document.querySelector<HTMLDivElement>("#items-productos");
         const categoriaFiltro = categoria.nombre;
 
         const filtrados = productos.filter((p: Product) =>
@@ -225,13 +179,14 @@ function crearControlesAgregar(): HTMLElement {
 
     btnVolver.addEventListener("click", () => {
 
-        const detalleBox = document.querySelector("#detalleProducto") as HTMLElement;
-        const productoBox = document.querySelector("#productos-box") as HTMLElement;
-        const categoriaBox = document.querySelector(".box-categoria") as HTMLElement;
+        const contProductos = document.querySelector(".cont-productos") as HTMLElement;
+        const contCategorias = document.querySelector(".cont-categorias") as HTMLElement;
+        const render = document.querySelector(".render-producto") as HTMLElement;
 
-        detalleBox.style.display = "none";
-        productoBox.style.display = "flex";
-        categoriaBox.style.display = "flex";
+        contProductos.style.display = 'flex';
+        contCategorias.style.display = 'block';
+        render.style.display = 'none';
+    
     })
 
     return box;
@@ -241,10 +196,17 @@ function crearControlesAgregar(): HTMLElement {
 function articulo(producto: Product, categorias: ICategorias[]): HTMLElement {
 
     const articulo = crearElemento('article', 'card');
+
+    // Caja de imagen
+    const boxImagen = crearElemento('div', 'box-imagen');
+    articulo.appendChild(boxImagen);
     const imagen: HTMLImageElement = crearElemento('img', 'imagen') as HTMLImageElement;
     imagen.src = producto.imagen;
+    boxImagen.appendChild(imagen);
 
-    const boxDetalles = crearElemento('div', 'caracteristicas');
+
+    // Caja de detalles
+    const boxCaracteristicas = crearElemento('div', 'box-caracteristicas');
     const textoCategoria = producto.categorias
         .map((catId: any) => {
             const cat = categorias.find(c => c.id === catId);
@@ -255,6 +217,11 @@ function articulo(producto: Product, categorias: ICategorias[]): HTMLElement {
     const categoria = crearElemento('p', 'categoria', textoCategoria);
     const titulo = crearElemento('h3', 'titulo', producto.nombre);
     const descripcion = crearElemento('p', 'descripcion', producto.descripcion);
+    boxCaracteristicas.append(categoria, titulo, descripcion);
+
+
+    //Box de precio y disponibilidad
+    const boxDetalles = crearElemento('div', 'box-detalles');
     const textoPrecio = `$${producto.precio}`;
     const precio = crearElemento('p', 'precio', textoPrecio);
 
@@ -268,8 +235,9 @@ function articulo(producto: Product, categorias: ICategorias[]): HTMLElement {
         disponible = crearElemento('p', 'disponible', 'No disponible') as HTMLElement;
         disponible.style.backgroundColor = 'red';
     }
-    boxDetalles.append(categoria, titulo, descripcion, precio, disponible);
-    articulo.append(imagen, boxDetalles);
+    boxDetalles.append(precio, disponible);
+
+    articulo.append(boxImagen, boxCaracteristicas, boxDetalles);
 
     imagen.addEventListener('click', () => {
         renderPrincipal(producto);
@@ -277,3 +245,4 @@ function articulo(producto: Product, categorias: ICategorias[]): HTMLElement {
 
     return articulo;
 }
+

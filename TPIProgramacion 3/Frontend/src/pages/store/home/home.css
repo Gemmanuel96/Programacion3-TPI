@@ -16,10 +16,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-body {
-    height: 100vh;
-    width: 100vw;
-}
+
 
 /*HEADER*/
 header {
@@ -84,14 +81,15 @@ header button:focus {
 main {
     display: flex;
     width: 100vw;
+    height: 100vh;
     /* background-color: blue; */
 }
 
 /* Categorias */
 .cont-categorias {
     flex: 0 0 15%;
-    height: 90vh;
-    border-right: 1px solid var(--color-borde);
+    height: 100%;
+
 }
 
 .cont-categorias h2,p {
@@ -106,6 +104,8 @@ main {
 
 #list-categorias {
     padding-top: 15px;
+    padding-left: 25px;
+    list-style: none;
 }
 
 #list-categorias li {
@@ -138,36 +138,48 @@ main {
 .cont-productos {
     overflow:scroll; 
     display: flex;
-    width: 100%;
+    width: 100vw;
     align-items: center;
     flex-direction: column;
     height: 95vh;
-    background-color: var(--color-primario);
 }
+
+/* Caja de Busqueda*/
 
 .box-busqueda {
     display: flex;
     justify-content: space-around;
-    width: 95%;
+    width: 90%;
     height: 4em;
     padding: 10px;
     background-color: var(--color-fondo);
     border-radius: 10px;
     margin: 10px;
-    border: 3px solid var(--color-borde);
+    border: 2px solid var(--color-borde);
 }
 
 .box-busqueda input {
     width: 60%;
     padding: 1em;
     border-radius: 5px;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
 }
 
-.box-busqueda select {
-    text-align: center;
-    width: 10em;
-    border-radius: 5px;
+.box-busqueda .filtros {
+    display: flex;
+    justify-content: space-around;
 
+}
+.box-busqueda .filtros select {
+    padding: 0.5em;
+    border-radius: 5px;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
+}
+
+.box-busqueda .filtros {
+    width: 25em;
 }
 
 /* Box de Items de productos */
@@ -176,14 +188,13 @@ main {
     overflow: scroll;
     display: flex;
     flex-wrap: wrap;
-    gap: 10;
+    gap: 1em;
     justify-content: space-around;
     width: 95%;
     height: 100%;
-    background-color: var(--color-fondo);
+    background-color: var(--color-blanco);
     margin: 5px 0;
     border-radius: 5px;
-    border: var(--color-borde) 3px solid;
 }
 
 
@@ -192,182 +203,112 @@ main {
 .card{
     margin: 10px;
     display: flex;
+    justify-content: space-around;
     padding: 15px;
     flex-direction: column;
-    background-color: var(--color-borde);
+    background-color: var(--color-blanco);
     width: 250px;
     height: 400px;
-
+    border: solid 2px var(--color-borde);
 }
 
-.card .caracteristicas {
-    margin: 15px 0;
+.card:hover{
+    transition: 300ms ease-in-out all;
+   border: 0.01em solid var(--color-borde);
+    box-shadow: 3px 5px #ff634780;
+}
+
+/*Imagen*/
+
+.card .box-imagen {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.card .titulo {
-    font-size: medium;
-    text-align: center;
-}
-
-.card p {
-    font-size: small;
-}
-
-.card .categoria {
-    background-color: #f0f0f0;
-    width: 120px;
-    height: 30px;
-    text-align: center;
-    margin: 5px auto;
-    border-radius: 5px;
-}
-
-.card .precio {
-    margin-top: 10px;
-    font-weight: 600;
-    font-size: larger;
-}
-
-.card .descripcion {
-    margin: 10px;
-}
-
-.card .disponible {
-    text-align: center;
-    background-color: green;
-    width: 120px;
-    margin-top: 5px;
-    border-radius: 5px;
-    color: #ddd;
-    font-weight: 600;
-    padding: 10px;
-}
-
-.card .imagen {
-    width: 180px;
-    margin: auto;
-    /* height: 130px; */
-}
-
-
-/*Render del producto*/
-
-#detalle-producto {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: 60%;
-    width: 100%;
+    height: 150px;
     background-color: var(--color-fondo);
 }
 
-#detalle-producto img {
-    background-color: #333;
-    height: 50%;
-    width: 50%;
+.card .box-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.box-detalle {
-    background-color: #f0f0f0;
+/*CARACTERISTICAS*/
+
+.card .box-caracteristicas {
     display: flex;
-    width: 90%;
-    height: 90%;
+    margin: 10px 0;
+    gap: 5px;
+    flex-direction: column;
+    text-align: center;
 }
 
-
-#alerta {
-    display: none;
-    z-index: 2;
-    background-color: green;
-    padding: 0.5em;
-    font-size: small;
+.card .box-caracteristicas .categoria {
+    display: block;
+    color: var(--color-texto);
+    background-color: var(--color-fondo);
     font-weight: 600;
-    border-radius: 5px;
+    padding: 8px;
 }
 
+.card .box-caracteristicas .titulo{
+    font-size: medium;
+}
+
+.card .box-caracteristicas .descripcion{
+    font-size: small;
+}
+
+/*Detalle*/
+.card .box-detalles {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--color-blanco);
+    padding: 5px;
+}
+
+
+.card .box-detalles .precio {
+    color: var(--color-texto);
+    padding: 5px;
+}
+
+.card .box-detalles .disponible {
+    border-radius: 5px;
+    color: var(--color-blanco);
+    font-weight: 600;
+    width: 500px;
+    padding: 5px;
+}
+
+/*Render del producto*/
+.render-producto {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    background-color: var(--color-primario);
+}
+
+.render-producto .render-img {
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    background-color: var(--color-fondo);
+}
+
+.render-producto .render-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    background-color: var(--color-blanco);
+    flex-direction: column;
+}
 
 
 /* Caja del Producto */
-
-#detalleProducto {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    gap: 1em;
-}
-
-/* //Caja de imagen */
-.img-c {
-    width: 50%;
-    justify-content: center;
-    align-items: center;
-    flex: 0 0 50%;
-    background-color: var(--color-fondo);
-}
-
-.img-c img {
-    width: 100%
-}
-
-/* //Caja de detalles */
-.det-c {
-    border: var(--color-borde) 5px solid;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1em;
-    align-items: flex-start;
-    margin: 10px;
-    padding: 0 5em;
-    flex: 0 0 40%;
-    background-color: var(--color-focusfondo);
-    width: 100%;
-    height: 70%;
-    border-radius: 1EM;
-}
-
-.boxProducto {
-    display: flex;
-    flex-direction: row;
-    width: 80%;
-    height: 20%;
-}
-
-.boxControles {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 3em;
-    width: 10em;
-    background-color: var(--color-fondo);
-}
-
-.boxControles button {
-    font-size: x-large;
-    width: 2em;
-    margin: auto;
-}
-
-.boxControles span {
-    font-size: x-large;
-}
-
-.boxControlesAgregar {
-    display: flex;
-    justify-content: space-around;
-    width: 25em;
-    height: 3em;
-    background-color: aqua;
-}
-
-.boxControlesAgregar button {
-    margin: auto;
-    font-size: large;
-    padding: 5px 20px;
-}

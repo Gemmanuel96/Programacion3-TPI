@@ -17,12 +17,12 @@
         <h1>🍕 Food Store</h1>
 
         <nav>
-            <a href="#">Inicio</a>
+            <a href="../home/home.html" id="inicio">Inicio</a>
             <a href="../../client/home/home.html">Mi Usuario</a>
             <a href="../../client/home/home.html">Mis pedidos</a>
             <a href="../cart/cart.html">Carrito🛒 <span>0</span></a>
         </nav>
-        
+
         <button id="btn-sesion">Cerrar Sesion ⛔</button>
 
     </header>
@@ -51,23 +51,25 @@
             <div class="box-busqueda">
                 <input type="text" id="buscador" name="buscador" placeholder="🔎 Buscar productos... ">
 
-                <!-- Seleccionado por Ordenamiento -->
-                <select name="" id="Ordenado">Ordenado por
-                    <option value="">Nombre</option>
-                    <option value="">Precio</option>
-                </select>
+                <div class="filtros">
+                    <!-- Seleccionado por Ordenamiento -->
+                    <select name="" id="Ordenado">Ordenado por
+                        <option value="">Nombre</option>
+                        <option value="">Precio</option>
+                    </select>
 
-                <!-- Seleccionado por Categoria -->
-                <select name="" id="Categoria">Categoria
-                    <option value="Hamburguesa">Hamburguesa</option>
-                    <option value="Pizza">Pizza</option>
-                </select>
+                    <select name="" id="Categoria">Categoria
+                        <option value="Hamburguesa">Hamburguesa</option>
+                        <option value="Pizza">Pizza</option>
+                    </select>
+
+                </div>
             </div>
 
 
             <!-- Caja de Items de Productos -->
             <div id="items-productos">
-
+                <!-- Tarjetas de productos -->
 
             </div>
 
@@ -76,8 +78,23 @@
 
         </section>
 
-        <div id="detalleProducto">
+        <div class="render-producto">
 
+            <div class="render-img">
+                <!-- Imagen del producto -->
+            </div>
+
+            <div class="render-info">
+
+                <div class="informacion">
+                    <!-- Informacion del producto -->
+                </div>
+
+                <div class="controles">
+                    <!-- Controles del producto -->
+                </div>
+
+            </div>
         </div>
 
 
