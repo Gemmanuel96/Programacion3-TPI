@@ -110,8 +110,54 @@ if (btnSesion) {
 
 function renderPrincipal(producto: Product) {
 
-    c
+    //Traemos los elementos del DOM principales
+    const contProductos = document.querySelector(".cont-productos") as HTMLElement;
+    const contCategorias = document.querySelector(".cont-categorias") as HTMLElement;
+    const render = document.querySelector(".render-producto") as HTMLElement;
+
+    contProductos.style.display = 'none';
+    contCategorias.style.display = 'none';
+    render.style.display = 'flex';
+
+
+    //Traemos los elementos del DOM para renderizar el producto
+    const renderImagen = document.querySelector<HTMLImageElement>(".render-img");
+    const renderInfo = document.querySelector<HTMLDivElement>(".render-info");
+    const informacion = document.querySelector<HTMLDivElement>(".informacion") as HTMLDivElement;
+    const controles = document.querySelector<HTMLDivElement>(".controles");
+
+    //Renderizamos la imagen del producto
+    if (renderImagen) {
+        renderImagen.innerHTML = "";
+        const imagen: HTMLImageElement = crearElemento('img', 'imagen') as HTMLImageElement;
+        imagen.src = producto.imagen;
+        renderImagen.appendChild(imagen);
+    }
+
+    //Renderizamos la informacion del producto
+    if (informacion && controles) {
+        informacion.innerHTML = "";
+        const titulo = crearElemento('h3', 'titulo', producto.nombre);
+        const descripcion = crearElemento('p', 'descripcion', producto.descripcion);
+        const precio = crearElemento('p', 'precio', `$${producto.precio}`);
+        informacion.append(titulo, descripcion, precio);
+
+        controles.innerHTML = "";
+        const control = crearControles();
+        const control1 = crearControlesAgregar();
+        controles.append(control, control1);
+
+        renderInfo?.append(informacion,controles);
+
+    }
+
+    //Renderizamos los controles del producto
+
+    if(renderInfo && renderImagen) {
+        render?.append(renderImagen, renderInfo);
+    }
     
+
 }
 
 
@@ -186,7 +232,7 @@ function crearControlesAgregar(): HTMLElement {
         contProductos.style.display = 'flex';
         contCategorias.style.display = 'block';
         render.style.display = 'none';
-    
+
     })
 
     return box;
